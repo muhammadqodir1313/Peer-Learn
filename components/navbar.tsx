@@ -24,7 +24,7 @@ export function Navbar() {
 
   const unreadCount = notifications.filter((n) => !n.read).length
 
-  const markAsRead = (id) => {
+  const markAsRead = (id: number) => {
     setNotifications((prev) => prev.map((n) => (n.id === id ? { ...n, read: true } : n)))
   }
 

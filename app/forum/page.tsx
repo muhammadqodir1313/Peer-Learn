@@ -71,7 +71,7 @@ export default function ForumPage() {
   const [selectedSubject, setSelectedSubject] = useState("all")
   const [showAnswered, setShowAnswered] = useState("all")
   const [showQuestionForm, setShowQuestionForm] = useState(false)
-  const [newQuestion, setNewQuestion] = useState({ title: "", content: "", subject: "" })
+  const [newQuestion, setNewQuestion] = useState<{ title: string; content: string; subject: string }>({ title: "", content: "", subject: "" })
 
   const filteredPosts = forumPosts.filter((post) => {
     const matchesSearch =

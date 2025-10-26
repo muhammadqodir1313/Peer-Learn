@@ -15,7 +15,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({})
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -24,7 +24,7 @@ export default function LoginPage() {
     setIsLoading(true)
 
     // Validation
-    const newErrors = {}
+    const newErrors: { email?: string; password?: string } = {}
     if (!email) newErrors.email = "Email kiritish majburiy"
     if (!password) newErrors.password = "Parol kiritish majburiy"
     if (password.length < 6) newErrors.password = "Parol kamida 6 ta belgidan iborat bo'lishi kerak"
