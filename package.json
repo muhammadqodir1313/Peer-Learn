@@ -6,7 +6,11 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "next build && next start",
+    "deploy:prod": "next build && next start",
+    "deploy:dev": "next build && next start",
+    "deploy:test": "next build && next start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -60,9 +64,9 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/node": "^22.18.13",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
     "postcss": "^8.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
