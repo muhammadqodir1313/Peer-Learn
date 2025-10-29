@@ -89,12 +89,21 @@ const initialMessages = [
   },
 ]
 
+type Message = {
+  id: number
+  author: string
+  avatar: string
+  content: string
+  time: string
+  isOwn: boolean
+}
+
 export default function ChatPage() {
   const [selectedRoom, setSelectedRoom] = useState(chatRooms[0])
-  const [messages, setMessages] = useState(initialMessages)
+  const [messages, setMessages] = useState<Message[]>(initialMessages)
   const [newMessage, setNewMessage] = useState("")
   const [searchTerm, setSearchTerm] = useState("")
-  const [roomMessages, setRoomMessages] = useState({
+  const [roomMessages, setRoomMessages] = useState<Record<number, Message[]>>({
     1: initialMessages,
     2: [],
     3: [],
@@ -121,7 +130,7 @@ export default function ChatPage() {
     }
   }
 
-  const handleRoomChange = (room) => {
+  const handleRoomChange = (room: typeof chatRooms[number]) => {
     setSelectedRoom(room)
     setMessages(roomMessages[room.id] || [])
   }

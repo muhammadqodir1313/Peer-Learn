@@ -19,7 +19,7 @@ export default function CreateQuestionPage() {
   const [content, setContent] = useState("")
   const [subject, setSubject] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState<{ title?: string; content?: string; subject?: string }>({})
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,7 +28,7 @@ export default function CreateQuestionPage() {
     setIsSubmitting(true)
 
     // Validation
-    const newErrors = {}
+    const newErrors: { title?: string; content?: string; subject?: string } = {}
     if (!title.trim()) newErrors.title = "Savol sarlavhasi kiritish majburiy"
     if (!content.trim()) newErrors.content = "Savol mazmuni kiritish majburiy"
     if (!subject) newErrors.subject = "Fan tanlash majburiy"

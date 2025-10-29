@@ -19,7 +19,7 @@ export default function SignupPage() {
     confirmPassword: "",
   })
   const [isLoading, setIsLoading] = useState(false)
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState<{ name?: string; email?: string; password?: string; confirmPassword?: string }>({})
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,7 +28,7 @@ export default function SignupPage() {
     setIsLoading(true)
 
     // Validation
-    const newErrors = {}
+    const newErrors: { name?: string; email?: string; password?: string; confirmPassword?: string } = {}
     if (!formData.name) newErrors.name = "Ism kiritish majburiy"
     if (!formData.email) newErrors.email = "Email kiritish majburiy"
     if (!formData.password) newErrors.password = "Parol kiritish majburiy"

@@ -71,7 +71,7 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [saveSuccess, setSaveSuccess] = useState(false)
-  const [avatarFile, setAvatarFile] = useState(null)
+  const [avatarFile, setAvatarFile] = useState<string | null>(null)
   const [contentFilter, setContentFilter] = useState("all")
   const [sortOrder, setSortOrder] = useState("newest")
   const [name, setName] = useState("Abdullajonov Muhammadqodir")
@@ -94,12 +94,12 @@ export default function ProfilePage() {
     setTimeout(() => setSaveSuccess(false), 3000)
   }
 
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0]
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
     if (file) {
       const reader = new FileReader()
-      reader.onload = (e) => {
-        setAvatarFile(e.target.result)
+      reader.onload = (event) => {
+        setAvatarFile(event.target?.result as string)
       }
       reader.readAsDataURL(file)
     }
@@ -111,7 +111,10 @@ export default function ProfilePage() {
       return item.type === contentFilter
     })
     .sort((a, b) => {
-      if (sortOrder === "newest") return new Date(b.createdAt) - new Date(a.createdAt)
+      if (sortOrder === "newest") {
+        // Sort by creation order (since createdAt is relative time string)
+        return b.id - a.id
+      }
       if (sortOrder === "popular") return b.views - a.views
       return b.likes - a.likes
     })

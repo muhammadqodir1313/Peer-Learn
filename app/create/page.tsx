@@ -22,11 +22,11 @@ export default function CreatePage() {
   const [questions, setQuestions] = useState([{ question: "", options: ["", "", "", ""], correctAnswer: 0 }])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
-  const [uploadedFile, setUploadedFile] = useState(null)
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null)
   const [uploadProgress, setUploadProgress] = useState(0)
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0]
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
     if (file) {
       setUploadedFile(file)
       // Simulate upload progress
@@ -53,15 +53,15 @@ export default function CreatePage() {
     }
   }
 
-  const updateQuestion = (index: number, field: string, value: any) => {
+  const updateQuestion = (index: number, field: string, value: string | number) => {
     const updated = [...questions]
     if (field === "question") {
-      updated[index].question = value
+      updated[index].question = value as string
     } else if (field === "correctAnswer") {
-      updated[index].correctAnswer = value
+      updated[index].correctAnswer = value as number
     } else if (field.startsWith("option")) {
       const optionIndex = Number.parseInt(field.split("-")[1])
-      updated[index].options[optionIndex] = value
+      updated[index].options[optionIndex] = value as string
     }
     setQuestions(updated)
   }
